@@ -116,15 +116,25 @@ def move():
         if valid(point + course):
             point.move(course)
         else:
-            options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
-            ]
-            plan = choice(options)
-            course.x = plan.x
-            course.y = plan.y
+          if(pacman.x > point.x):
+            #pacman a la derecha
+            if(pacman.y > point.y):
+            #pacman arriba a la derecha
+              options = [vector(5,0), vector(0,5)] #RU
+            else:
+              #pacman abajo a la derecha
+              options = [vector(5,0), vector(0,-5)] #RD
+          else:
+            if(pacman.y > point.y):
+            #pacman arriba a la izquierda
+              options = [vector(-5,0), vector(0,5)] #RU
+            else:
+              #pacman abajo a la izquierda
+              options = [vector(-5,0), vector(0,-5)] #RD
+
+          plan = choice(options)
+          course.x = plan.x
+          course.y = plan.y
 
         up()
         goto(point.x + 10, point.y + 10)
